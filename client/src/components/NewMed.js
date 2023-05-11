@@ -26,13 +26,12 @@ export default function NewMed() {
         event.preventDefault();
         if(mName==="" || uid===0 || disease==="" || cpu===0.0 || allergy==="")
         {
-            // appendAlert();
+            
             alert("Fill the complete form")
         }
         else
         {
-            // greenAlert();
-            
+                       
             newMed();
             alert("Medicine added Successfully")
         }
@@ -74,7 +73,7 @@ export default function NewMed() {
             </div>
 
             <div className="col-md-6">
-                <label className="form-label">Allergy Warning</label>
+                <label className="form-label">Allergy Warnin &#40; enter "na" if none &#41;</label>
                 <input type="text" className="form-control" onChange={(e) => setAllergy(e.target.value)} id="AllergyWarning"/>
             </div>
             

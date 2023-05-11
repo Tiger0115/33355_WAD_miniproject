@@ -45,11 +45,11 @@ function App() {
 						element={<SearchMed />}
 					/>
 					<Route
-						path='AddStock'
+						path='/AddStock'
 						element={<AddStock />}
 					/>
 					<Route
-						path='StockAlert'
+						path='/StockAlert'
 						element={<StockAlert />}
 					/>
 				</Routes>

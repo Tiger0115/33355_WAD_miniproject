@@ -96,7 +96,7 @@ export default function Register() {
 
 					<div className='col-md-12'>
 						<label className='form-label'>
-							User Id
+							Email Id
 						</label>
 						<input
 							name='userid'
@@ -124,7 +124,7 @@ export default function Register() {
 							onClick={handleSubmit}
 							type='button'
 							className='btn btn-primary btn-block mb-4'>
-							Sign in
+							Register
 						</button>
 					</div>
 				</form>

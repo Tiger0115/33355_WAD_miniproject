@@ -43,9 +43,10 @@ export default function Home() {
         "mName": mName,
         "uid": uid,
         "cpu": cpu,
-        "stock": stock
+        "stock": sellStock
       }
      setSellMed(JSON.parse(temp));
+     
      
     }
   }
@@ -54,7 +55,7 @@ export default function Home() {
     setSellStock(event.target.value)
     if(uid===0)
     {
-      alert("Medicine Name entered incorrectly")
+      alert("Medicine Name Not Found")
     }
     else if(sellStock>stock)
     {
@@ -97,7 +98,7 @@ export default function Home() {
               <input type="text" class="form-control" onChange={checkName} aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
 
               <span class="input-group-text" id="inputGroup-sizing-sm">Quantity</span>
-              <input type="number" class="form-control" onChange={checkQuantity} onClick={StockAlert} aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+              <input type="number" class="form-control" onChange={checkQuantity}  aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
               <button type="button" class="btn btn-primary" onClick={addItem}>+ Add Medicine</button>
             </div>
             <button type="button" class="btn btn-primary">Complete Order</button>

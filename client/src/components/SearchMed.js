@@ -15,7 +15,7 @@ export default function SearchMed() {
 
     
     const getMed=()=>{
-        axios.post('http://localhost:8000/findMed', mName)
+        axios.post('http://localhost:8000/findMedicine', mName)
         .then(res=>{
             setUid(res.uid);
             setDisease(res.uid);
