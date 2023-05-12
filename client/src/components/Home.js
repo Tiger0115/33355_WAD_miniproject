@@ -15,7 +15,7 @@ export default function Home() {
   const [sellStock,setSellStock]=useState(0);
 
   const [list, setList]= useState([])
-  const [data,setData]=useState([])
+  // const [data,setData]=useState([])
   const [sellMed, setSellMed] = useState([])
   let arr=[];
 
@@ -45,7 +45,10 @@ export default function Home() {
           setstock(res.data[0].incomingStock);
           setAllergy(res.data[0].allergyWarning);
       })
-      .catch(err => console.error(err));
+      .catch(err => {
+        console.error(err);
+      alert("Medicine not found")
+    });
     
     
     if(sellStock>stock)
@@ -54,8 +57,7 @@ export default function Home() {
     }
     else
     {
-      
-      
+           
       let temp={
         "mName": mName,
         "uid": uid,
@@ -65,17 +67,19 @@ export default function Home() {
       
       arr.push(temp)
       alert("Medicine Added Successfully")
+      console.log(temp.mName);
       setSellMed(arr)
-      axios.post('http://localhost:8000/medicine/bill', {mName,sellStock})
-      .then(res=>{
-        // console.log(res);        
-        setUid(res.data.uid);
-        setDisease(res.data.disease);
-        setCpu(res.data.costPerUnit);
-        setstock(res.data.incomingStock);
-        setAllergy(res.allergyWarning);         
-      })
-      .catch(err => console.error(err));
+      console.log(temp);
+      // axios.post('http://localhost:8000/medicine/bill', {mName,sellStock})
+      // .then(res=>{
+      //   // console.log(res);        
+      //   setUid(res.data.uid);
+      //   setDisease(res.data.disease);
+      //   setCpu(res.data.costPerUnit);
+      //   setstock(res.data.incomingStock);
+      //   setAllergy(res.allergyWarning);         
+      // })
+      // .catch(err => console.error(err));
     //  console.log(uid)
     }
   }
@@ -109,9 +113,9 @@ export default function Home() {
               </tr>
               </thead>
 
-             
-              {sellMed.map((med, index)=>(                 
-                   <tbody>
+             <tbody>
+              {sellMed.map((med, index)=>(                
+                   
                   <tr key={index}>
                       <td>{med.mName}</td>
                       <td>{med.uid}</td>
@@ -119,10 +123,10 @@ export default function Home() {
                       <td>{med.cpu}</td>                       
                       
                       <td>{med.stock * med.cpu}</td>
-                  </tr></tbody>
+                  </tr>
                 ))
               }
-              
+              </tbody>
 
             </table>
             <div class="input-group input-group-sm mb-3">

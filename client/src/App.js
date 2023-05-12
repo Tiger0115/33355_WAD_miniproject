@@ -15,6 +15,7 @@ import {
 	Link,
 	useParams,
 } from "react-router-dom";
+import Logout from "./components/Logout";
 
 function App() {
 	const url = window.location.href.split("/")[3];
@@ -53,6 +54,7 @@ function App() {
 						element={<StockAlert />}
 					/>
 				</Routes>
+				
 			</Router>
 		</>
 	);

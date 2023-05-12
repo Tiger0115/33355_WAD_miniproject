@@ -1,4 +1,5 @@
 import React from 'react'
+import Logout from './Logout'
 
 export default function Navbar() {
   return (
@@ -30,11 +31,11 @@ export default function Navbar() {
                     <li className="nav-item">
                         <a className="nav-link active" aria-current="page" href="/StockAlert">Stock Alert</a>
                     </li>
-                    
+                    <Logout />
 
                 </ul>
 
-                <button class="btn btn-outline-secondary" style={{color:"black", border:"2px solid black"}} type="submit">Log Out</button>
+                {/* <button class="btn btn-outline-secondary" style={{color:"black", border:"2px solid black"}} type="submit">Log Out</button> */}
             </div>
         </div>
     </nav>

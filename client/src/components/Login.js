@@ -1,24 +1,56 @@
-import React, {useState} from "react";
+import React, {useState,useEffect} from "react";
 import axios from "axios";
 import NewNavbar from "./NewNavbar";
-import { auth, signInWithEmailAndPassword, signInWithGoogle } from "./Firebase";
+import { auth, logInWithEmailAndPassword, signInWithGoogle } from "./Firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useNavigate,BrowserRouter} from "react-router-dom";
+import Logout from "./Logout";
+
 
 export default function Login() {
-	const [user, setUser] = useState({
+	const [person, setPerson] = useState({
 		email: "",
 		password: "",
 	});
+	const [user, loading, error] = useAuthState(auth);
+	const navigate = useNavigate();
+	useEffect(() => {
+		if (loading) {
+		  // maybe trigger a loading screen
+		  return;
+		}
+		if (user){
+			navigate("/");
+			alert("User Logged in Successfully");
+	    }
+	  }, [user, loading]);
 
-	const handleSubmit = async (e) => {
-		e.preventDefault();
-		console.log(user);
+	// const [email, setEmail] = useState("");
+	// const [pass, setPass] = useState("");
 
-		const res = await axios.post(
-			"http://localhost:8000/auth/login",
-			user,
-		);
-	};
+	// const handleChange=()=>{
+	// 	if(email==="pwaghanna@yahoo.com" && pass==="12345678")
+	// 	{
+			
+	// 	}
+	// 	else
+	// 	{
+	// 		alert("Wrong inputs");
+	// 	}
+	// }
+
+	// const handleSubmit = async (e) => {
+	// 	e.preventDefault();
+	// 	console.log(user);
+
+	// 	const res = await axios.post(
+	// 		"http://localhost:8000/auth/login",
+	// 		user,
+	// 	);
+	// };
+	<BrowserRouter>
+      <Logout />
+  </BrowserRouter>
 	return (
 		<>
 			<NewNavbar />
@@ -32,8 +64,8 @@ export default function Login() {
 						</label>
 						<input
 							onChange={(e) =>
-								setUser({
-									...user,
+								setPerson({
+									...person,
 									email: e
 										.target
 										.value,
@@ -54,8 +86,8 @@ export default function Login() {
 						</label>
 						<input
 							onChange={(e) =>
-								setUser({
-									...user,
+								setPerson({
+									...person,
 									password: e
 										.target
 										.value,
@@ -68,19 +100,20 @@ export default function Login() {
 					</div>
 							<br/>
 					
-					<div className="col 4">			
-					<button onClick={() => signInWithEmailAndPassword(user.email, user.password)} type='button' className='btn btn-primary btn-block mb-4 '>
+					<div className="col 4">		
+					{console.log(person.password)}	
+					<button onClick={() => logInWithEmailAndPassword(person.email, person.password)} type='button' className='btn btn-primary btn-block mb-4 '>
 						Sign in
 					</button>
-					<button className="login__btn login__google" onClick={signInWithGoogle}>
+					{/* <button className="login__btn login__google" onClick={signInWithGoogle}>
                        Login with Google
-                    </button>
+                    </button> */}
 					</div>
-					<div className='col-12'>
+					{/* <div className='col-12'>
 						<p>							
 							<a href='/Register'>Register Employee Here</a>
 						</p>
-					</div>
+					</div> */}
 				</form>
 			</div>
 		</>
