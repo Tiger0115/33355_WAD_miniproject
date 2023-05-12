@@ -1,6 +1,8 @@
 import React, {useState} from "react";
 import axios from "axios";
 import NewNavbar from "./NewNavbar";
+import { auth, signInWithEmailAndPassword, signInWithGoogle } from "./Firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 export default function Login() {
 	const [user, setUser] = useState({
@@ -67,9 +69,12 @@ export default function Login() {
 							<br/>
 					
 					<div className="col 4">			
-					<button onClick={handleSubmit} type='button' className='btn btn-primary btn-block mb-4 '>
+					<button onClick={() => signInWithEmailAndPassword(user.email, user.password)} type='button' className='btn btn-primary btn-block mb-4 '>
 						Sign in
 					</button>
+					<button className="login__btn login__google" onClick={signInWithGoogle}>
+                       Login with Google
+                    </button>
 					</div>
 					<div className='col-12'>
 						<p>							
