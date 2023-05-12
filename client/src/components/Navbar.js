@@ -37,7 +37,7 @@ export default function Navbar() {
 
                 </ul>
                 <div>
-                 <button button class="btn btn-outline-secondary" style={{color:"black", border:"2px solid black"}} type="logout" ><a href="/Login">Logout</a></button>
+                 <button button class="btn btn-outline-secondary" style={{color:"black", border:"2px solid black"}} type="logout" ><a style={{color:"black", visited:"black"}} href="/Login">Logout</a></button>
               </div> 
                 
             </div>
