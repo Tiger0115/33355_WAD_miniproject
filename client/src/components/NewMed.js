@@ -1,5 +1,6 @@
 import React,{useState} from 'react';
 import axios from 'axios'
+import Navbar from './Navbar';
 
 export default function NewMed() {
 
@@ -42,7 +43,7 @@ export default function NewMed() {
 
   return (
     <>
-        
+        <Navbar/>
         <div className='container my-3'>
         <h3>Add New Medicine</h3>
         <br/>

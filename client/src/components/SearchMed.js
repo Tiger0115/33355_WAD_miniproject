@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 import axios from 'axios'
-// import Navbar from './Navbar'
+import Navbar from './Navbar'
 
 export default function SearchMed() {
 
@@ -35,7 +35,7 @@ export default function SearchMed() {
 
   return (
     <>
-       {/* <Navbar/> */}
+       <Navbar/>
 
         <form className='container my-5'>
         <div className="row mb-3">        

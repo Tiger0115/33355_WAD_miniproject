@@ -1,6 +1,6 @@
 import React,{useState, useEffect} from 'react'
 import axios from 'axios'
-// import Navbar from './Navbar'
+import Navbar from './Navbar'
 
 export default function StockAlert() {
 
@@ -23,7 +23,7 @@ export default function StockAlert() {
 
   return (
     <>
-     {/* <Navbar/> */}
+     <Navbar/>
      <div className='container my-5'>
      <table className='table table-bordered border-primary'>
               <thead>

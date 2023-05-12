@@ -16,6 +16,7 @@ import {
 	useParams,
 } from "react-router-dom";
 import Logout from "./components/Logout";
+import Empty from "./components/Empty";
 
 function App() {
 	const url = window.location.href.split("/")[3];
@@ -23,9 +24,10 @@ function App() {
 	return (
 		<>
 			{url !== "login" && url !== "register" ? (
-				<Navbar />
+				<Empty/>
 			) : null}
 			<Router>
+				{/* <Navbar/> */}
 				<Routes>
 					<Route path='/' element={<Home />} />
 					<Route

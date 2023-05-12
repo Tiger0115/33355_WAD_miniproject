@@ -25,32 +25,37 @@ export default function Login() {
 	    }
 	  }, [user, loading]);
 
-	// const [email, setEmail] = useState("");
-	// const [pass, setPass] = useState("");
+	  const loginFunc=(event)=>{
+		// event.preventDefault();
+		logInWithEmailAndPassword(person.email, person.password)
+	  }
 
-	// const handleChange=()=>{
-	// 	if(email==="pwaghanna@yahoo.com" && pass==="12345678")
-	// 	{
+// 	// const [email, setEmail] = useState("");
+// 	// const [pass, setPass] = useState("");
+
+// 	// const handleChange=()=>{
+// 	// 	if(email==="pwaghanna@yahoo.com" && pass==="12345678")
+// 	// 	{
 			
-	// 	}
-	// 	else
-	// 	{
-	// 		alert("Wrong inputs");
-	// 	}
-	// }
+// 	// 	}
+// 	// 	else
+// 	// 	{
+// 	// 		alert("Wrong inputs");
+// 	// 	}
+// 	// }
 
-	// const handleSubmit = async (e) => {
-	// 	e.preventDefault();
-	// 	console.log(user);
+// 	// const handleSubmit = async (e) => {
+// 	// 	e.preventDefault();
+// 	// 	console.log(user);
 
-	// 	const res = await axios.post(
-	// 		"http://localhost:8000/auth/login",
-	// 		user,
-	// 	);
-	// };
-	<BrowserRouter>
-      <Logout />
-  </BrowserRouter>
+// 	// 	const res = await axios.post(
+// 	// 		"http://localhost:8000/auth/login",
+// 	// 		user,
+// 	// 	);
+// 	// };
+// 	<BrowserRouter>
+//       <Logout />
+//   </BrowserRouter>
 	return (
 		<>
 			<NewNavbar />
@@ -109,11 +114,11 @@ export default function Login() {
                        Login with Google
                     </button> */}
 					</div>
-					{/* <div className='col-12'>
+					<div className='col-12'>
 						<p>							
 							<a href='/Register'>Register Employee Here</a>
 						</p>
-					</div> */}
+					</div>
 				</form>
 			</div>
 		</>

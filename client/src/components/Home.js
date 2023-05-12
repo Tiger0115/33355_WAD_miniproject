@@ -2,7 +2,7 @@ import React,{useState} from 'react'
 import axios from 'axios'
 import StockAlert from './StockAlert';
 // import { baseModelName } from '../../../server/models/medicine.schema';
-// import Navbar from './Navbar'
+import Navbar from './Navbar'
 
 export default function Home() {
 
@@ -98,7 +98,7 @@ export default function Home() {
 
   return (
     <>
-        {/* <Navbar/> */}
+        <Navbar/>
         <center>
         <div className='container my-5'>
             <table className='table table-bordered border-primary'>

@@ -157,41 +157,55 @@ const Register = () => {
   }, [user, loading]);
   return (
     <div className="register">
-      <div className="register__container">
-        <input
-          type="text"
-          className="register__textBox"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="Full Name"
-        />
-        <input
-          type="text"
-          className="register__textBox"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="E-mail Address"
-        />
-        <input
-          type="password"
-          className="register__textBox"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
-        />
-        <button className="register__btn" onClick={register}>
-          Register
-        </button>
-        <button
-          className="register__btn register__google"
-          onClick={signInWithGoogle}
-        >
-          Register with Google
-        </button>
+      <NewNavbar/>
+      <center>
+      <div className="register__container col-6">
+        <div className="col-6 my-3">
+          <input
+            type="text"
+            className="register__textBox"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Full Name"
+          />
+        </div>
+        <div className="col-6 my-3">
+          <input
+            type="text"
+            className="register__textBox"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="E-mail Address"
+          />
+        </div>
+        <div className="col-6 my-3">
+          <input
+            type="password"
+            className="register__textBox"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Password"
+          />
+        </div>
+        <div className="col-6 my-3">
+          <button className="register__btn" onClick={register}>
+            Register
+          </button>
+        </div>
+
+        <div className="col-6 my-3">
+          <button
+            className="register__btn register__google"
+            onClick={signInWithGoogle}
+          >
+            Register with Google
+          </button>
+        </div>
         <div>
           Already have an account? <Link to="/login">Login</Link> now.
         </div>
       </div>
+      </center>
 	      </div>
   );
 }
