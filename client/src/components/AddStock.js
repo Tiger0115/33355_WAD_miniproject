@@ -5,7 +5,7 @@ import axios from 'axios'
 
 export default function AddStock() {
 
-    const [mName, setmName]= useState("");
+    const [name, setname]= useState("");
     const [uid, setUid]= useState(0);
     const [disease, setDisease]= useState("");
     const [cpu, setCpu]= useState(0.0);
@@ -15,22 +15,50 @@ export default function AddStock() {
     const [newStock, setNewStock]= useState(0);
 
     
-    const getMed=()=>{
-        axios.post('http://localhost:8000/findMed', mName)
-        .then(res=>{
-            setUid(res.uid);
-            setDisease(res.uid);
-            setCpu(res.cpu);
-            setstock(res.stock);
-            setAllergy(res.allergy);
-        })
-        .catch(err => console.error(err));
+    // const getMed=()=>{
+    //     axios.post('http://localhost:8000/medicine/find' , name)
+    //     .then(res=>{
+    //         setUid(res.data[0].uid);
+    //         setDisease(res.data[0].uid);
+    //         setCpu(res.data[0].cpu);
+    //         setstock(res.data[0].stock);
+    //         setAllergy(res.data[0].allergy);
+    //     })
+    //     .catch(err => console.error(err));
+    // }
+    const updateMed = () => {
+        axios.put('http://localhost:8000/medicine/',{name,newStock})
+            .then(res=>{
+                console.log(res);
+                axios.post('http://localhost:8000/medicine/find', {name})
+                .then(response => {
+                    console.log(response);
+                    setUid(response.data[0].uid);
+                    setDisease(response.data[0].disease);
+                    setCpu(response.data[0].costPerUnit);
+                    setstock(response.data[0].incomingStock);
+                    setAllergy(response.data[0].allergyWarning);
+                    alert("Stock added Successfully")
+                })
+                .catch(err => {
+                    alert("Med not found");
+                    console.error(err)});
+    
+                
+            })
+            .catch(err => {
+                alert("Med not found");
+                console.error(err)});
+    }
+    const handleChange = (e) => {
+        e.preventDefault();
+        updateMed();
     }
 
-    const check=(event)=>{
-        setmName(event.target.value);
-        getMed();
-    }
+    // const check=(event)=>{
+    //     setname(event.target.value);
+    //     getMed();
+    // }
 
 
     const sendData = (event) =>{
@@ -38,16 +66,13 @@ export default function AddStock() {
         if(uid===0)
         {
             // appendAlert();
-            alert("Med not found")
+           
         }
         else
         {
             // greenAlert();
-            axios.post('http://localhost:8000/findMed', uid, newStock)
-            .then(res=>console.log(res))
-            .catch(err => console.error(err));
-
-            alert("Stock added Successfully")
+           
+            
         }
     }
 
@@ -60,7 +85,7 @@ export default function AddStock() {
         <div className="row mb-3">        
         <label for="inputMed" className="col-sm-2 col-form-label">Enter Medicine Name</label>
             <div className="col-sm-10">
-                <input type="email" className="form-control" onChange={check} id="inputMed"/>
+                <input type="text" value={name} className="form-control" onChange={(e) => setname(e.target.value)} id="inputMed"/>
             </div>
         </div>
         </form>
@@ -69,9 +94,8 @@ export default function AddStock() {
         <h3>Description - </h3>
         <br/>
 
-            <div className="col-12">
-                <label for="inputAddress" className="form-label">Medicine Name :</label>
-                
+        <div className="col-12">
+                <label for="inputAddress" className="form-label">Medicine Name : {name} </label>
             </div>
 
             <div className="col-md-12">
@@ -89,7 +113,7 @@ export default function AddStock() {
             </div>
 
             <div className="col-md-6">
-                <label className="form-label">Current Stock : {stock}</label>
+                <label className="form-label">Current Stock : {stock}{console.log(stock)}</label>
                 
             </div>
 
@@ -98,13 +122,16 @@ export default function AddStock() {
                 
             </div>
 
+            <br/>
+            <br/>
+
             <div className="col-md-6">
                 <label className="form-label">Incoming Stock - </label>
                 <input type="text" className="form-control" onChange={(e) => setNewStock(e.target.value)} id="newStock"/>
             </div>
 
             <div class="col-md-6 my-3">
-                <button type="submit" onClick={AddStock} class="btn btn-primary">Add Stock</button>
+                <button type="submit" onClick={handleChange} class="btn btn-primary">Add Stock</button>
             </div>
         </div>
     </>

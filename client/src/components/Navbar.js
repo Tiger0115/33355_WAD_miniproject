@@ -31,8 +31,10 @@ export default function Navbar() {
                         <a className="nav-link active" aria-current="page" href="/StockAlert">Stock Alert</a>
                     </li>
                     
-                   
+
                 </ul>
+
+                <button class="btn btn-outline-secondary" style={{color:"black", border:"2px solid black"}} type="submit">Log Out</button>
             </div>
         </div>
     </nav>

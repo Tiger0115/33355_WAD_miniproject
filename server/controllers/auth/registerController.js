@@ -1,4 +1,4 @@
-const {User} = require("../../Models");
+const {User} = require("../../models");
 
 async function registerController(req, res) {
 	console.log(req.body);

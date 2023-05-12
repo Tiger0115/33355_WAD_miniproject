@@ -13,29 +13,43 @@ export default function Home() {
   const [allergy, setAllergy]= useState("");
   const [sellStock,setSellStock]=useState(0);
 
+  const [list, setList]= useState([])
   const [data,setData]=useState([])
   const [sellMed, setSellMed] = useState([])
+  let arr=[];
 
-
-  const checkName=(event)=>{
-    setmName(event.target.value);
     const getMed=()=>{
-      axios.post('http://localhost:8000/findMed', mName)
+       
+       axios.post('http://localhost:8000/medicine/bill', {mName,sellStock})
       .then(res=>{
-        setUid(res.uid);
-        setDisease(res.uid);
-        setCpu(res.cpu);
-        setstock(res.stock);
-        setAllergy(res.allergy);         
+        // console.log(res);        
+        setUid(res.data.uid);
+        setDisease(res.data.disease);
+        setCpu(res.data.costPerUnit);
+        setstock(res.data.incomingStock);
+        setAllergy(res.allergyWarning);         
       })
       .catch(err => console.error(err));
     }
-  }
+  
 
   const addItem=()=>{
-    if(uid===0 || sellStock>stock)
+    setSellMed(arr);
+       axios.post('http://localhost:8000/medicine/bill', {mName,sellStock})
+      .then(res=>{
+        // console.log(res);        
+        setUid(res.data.uid);
+        setDisease(res.data.disease);
+        setCpu(res.data.costPerUnit);
+        setstock(res.data.incomingStock);
+        setAllergy(res.allergyWarning);         
+      })
+      .catch(err => console.error(err));
+    
+    
+    if(sellStock>stock)
     {
-      alert("Something went wrong, recheck the inputs");
+      alert("Stock Low");
     }
     else
     {
@@ -45,23 +59,24 @@ export default function Home() {
         "cpu": cpu,
         "stock": sellStock
       }
-     setSellMed(JSON.parse(temp));
-     
+      arr.push(temp)
+      alert("Medicine Added Successfully")
+      setSellMed(arr)
      
     }
   }
 
-  const checkQuantity=(event)=>{
-    setSellStock(event.target.value)
-    if(uid===0)
-    {
-      alert("Medicine Name Not Found")
-    }
-    else if(sellStock>stock)
-    {
-      alert("Quantity more than stock");
-    }    
-  }
+  // const checkQuantity=(event)=>{
+  //   setSellStock(event.target.value)
+  //   if(uid===0)
+  //   {
+  //     alert("Medicine Name Not Found")
+  //   }
+  //   else if(sellStock>stock)
+  //   {
+  //     alert("Quantity more than stock");
+  //   }    
+  // }
 
   return (
     <>
@@ -71,7 +86,7 @@ export default function Home() {
             <table className='table table-bordered border-primary'>
               <thead>
               <tr>
-                  <th>Sr. No.</th>
+                  
                   <th>Med Name</th>
                   <th>UID</th>
                   <th>Quantity</th>
@@ -80,28 +95,31 @@ export default function Home() {
               </tr>
               </thead>
 
-              <tbody>
+             
               {sellMed.map((med, index)=>(                 
-                  
+                   <tbody>
                   <tr key={index}>
+                      <td>{med.mName}</td>
                       <td>{med.uid}</td>
-                      <td>{med.mName}</td>                        
                       <td>{med.stock}</td>
-                  </tr>
+                      <td>{med.cpu}</td>                       
+                      
+                      <td>{med.stock * med.cpu}</td>
+                  </tr></tbody>
                 ))
               }
-              </tbody>
+              
 
             </table>
             <div class="input-group input-group-sm mb-3">
               <span class="input-group-text" id="inputGroup-sizing-sm">Medicine Name</span>
-              <input type="text" class="form-control" onChange={checkName} aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+              <input type="text" value={mName} class="form-control" onChange={(e) => setmName(e.target.value)} aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
 
               <span class="input-group-text" id="inputGroup-sizing-sm">Quantity</span>
-              <input type="number" class="form-control" onChange={checkQuantity}  aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+              <input type="number" value={sellStock} class="form-control" onChange={(e) => setSellStock(e.target.value)}  aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
               <button type="button" class="btn btn-primary" onClick={addItem}>+ Add Medicine</button>
             </div>
-            <button type="button" class="btn btn-primary">Complete Order</button>
+            <button type="button" class="btn btn-primary" onClick={getMed}>Complete Order</button>
         </div>
         </center>
     </>

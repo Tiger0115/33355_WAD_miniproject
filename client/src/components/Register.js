@@ -36,7 +36,9 @@ export default function Register() {
 	return (
 		<>
 			<NewNavbar />
-
+			<div className="my-3 mx-3">
+				<a style={{colr:"white"}} href="/Login"> Go Back</a>
+			</div>
 			<div className='container my-3'>
 				<h3>Add New Employee</h3>
 				<br />

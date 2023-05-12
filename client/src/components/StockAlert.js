@@ -5,19 +5,21 @@ import axios from 'axios'
 export default function StockAlert() {
 
 
-  const [data,setData]=useState([])
-
+  const [stocks,setStocks]=useState([])
+  // let stocks = [];
   const display=()=>{
-    axios.get('http://localhost:8000/stockAlert')
+    axios.get('http://localhost:8000/medicine/stock-alert')
         .then(res=>{
-            setData(res)
+            // console.log(res.data);
+            setStocks(res.data);
+            console.log(stocks)
         })
         .catch(err=> console.log(err));
   }
 
-  useEffect(() => {
-    display();
-  }, []);
+  // useEffect(() => {
+  //   display();
+  // }, []);
 
   return (
     <>
@@ -26,27 +28,29 @@ export default function StockAlert() {
      <table className='table table-bordered border-primary'>
               <thead>
               <tr>
-                  <th>Sr. No.</th>
+                  {/* <th>Sr. No.</th> */}
                   <th>Med Name</th>
                   <th>UID</th>
                   <th>Current Stock</th>
                   
               </tr>
               </thead>
-
+              {console.log(stocks)}
+              {stocks.map((med, index)=>(  
               <tbody>
-                {data.map((med, index)=>(                 
-                  
+                
                     <tr key={index}>
+                     
                         <td>{med.uid}</td>
-                        <td>{med.mName}</td>                        
-                        <td>{med.stock}</td>
+                        <td>{med.name}</td>                        
+                        <td>{med.incomingStock}</td>
                     </tr>
-                  ))
-                }
               </tbody>
+               ))
+              }
 
         </table> 
+        <button onClick={display}>Get Stock Alert</button>
         </div>
     </>
   )

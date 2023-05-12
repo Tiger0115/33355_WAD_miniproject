@@ -1,14 +1,26 @@
-const express = require("express");
-const cors = require("cors");
-const mongoose = require("mongoose");
-const authRouter = require("./Routes/authRouter");
-
+const express = require('express');
 const app = express();
-
-app.use(cors());
+const dotenv = require('dotenv');
+const cors = require('cors');
+const connectDB = require('./db.js');
+const medicineRouter = require('./routes/medicine.routes.js');
+const authRouter = require("./routes/authRouter");
+dotenv.config();
 app.use(express.json());
-app.use("/auth", authRouter);
+app.use(cors());
 
-app.listen(8000, () => {
-	console.log("Server is running on port 8000");
-});
+const PORT = process.env.PORT || 8000;
+
+app.get('/',(req,res) => {
+    res.send(
+       " <html><head></head><body><h1>Hello world</h1></body></html>"
+    )
+})
+app.use("/auth", authRouter);
+app.use('/medicine',medicineRouter);
+
+connectDB();
+
+app.listen(PORT,() => { 
+    console.log(`Server is listening on port ${PORT}`);
+})

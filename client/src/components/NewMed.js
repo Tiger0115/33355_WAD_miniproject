@@ -12,7 +12,7 @@ export default function NewMed() {
 
     const newMed= () =>{
 
-        axios.post('http://localhost:8000/', {
+        axios.post('http://localhost:8000/medicine', {
             mName, uid, disease, cpu, stock, allergy
         } )
         .then(res => console.log(res))
@@ -78,7 +78,7 @@ export default function NewMed() {
             </div>
             
             <div class="col-12">
-                <button type="submit" onClick={sendData} class="btn btn-primary" id="addMed">Add Medicine</button>
+                <button type="submit" onClick={sendData} className="btn btn-primary" id="addMed">Add Medicine</button>
             </div>
             
         </form>
