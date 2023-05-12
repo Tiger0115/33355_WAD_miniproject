@@ -1,6 +1,7 @@
 import React,{useState} from 'react'
 import axios from 'axios'
 import StockAlert from './StockAlert';
+// import { baseModelName } from '../../../server/models/medicine.schema';
 // import Navbar from './Navbar'
 
 export default function Home() {
@@ -19,7 +20,7 @@ export default function Home() {
   let arr=[];
 
     const getMed=()=>{
-       
+       alert("Sold");
        axios.post('http://localhost:8000/medicine/bill', {mName,sellStock})
       .then(res=>{
         // console.log(res);        
@@ -34,15 +35,15 @@ export default function Home() {
   
 
   const addItem=()=>{
-    setSellMed(arr);
-       axios.post('http://localhost:8000/medicine/bill', {mName,sellStock})
+    let name=mName
+    axios.post('http://localhost:8000/medicine/find', {name})
       .then(res=>{
-        // console.log(res);        
-        setUid(res.data.uid);
-        setDisease(res.data.disease);
-        setCpu(res.data.costPerUnit);
-        setstock(res.data.incomingStock);
-        setAllergy(res.allergyWarning);         
+          // console.log(res.data[0].uid);
+          setUid(res.data[0].uid);
+          setDisease(res.data[0].disease);
+          setCpu(res.data[0].costPerUnit);
+          setstock(res.data[0].incomingStock);
+          setAllergy(res.data[0].allergyWarning);
       })
       .catch(err => console.error(err));
     
@@ -53,16 +54,29 @@ export default function Home() {
     }
     else
     {
+      
+      
       let temp={
         "mName": mName,
         "uid": uid,
         "cpu": cpu,
         "stock": sellStock
       }
+      
       arr.push(temp)
       alert("Medicine Added Successfully")
       setSellMed(arr)
-     
+      axios.post('http://localhost:8000/medicine/bill', {mName,sellStock})
+      .then(res=>{
+        // console.log(res);        
+        setUid(res.data.uid);
+        setDisease(res.data.disease);
+        setCpu(res.data.costPerUnit);
+        setstock(res.data.incomingStock);
+        setAllergy(res.allergyWarning);         
+      })
+      .catch(err => console.error(err));
+    //  console.log(uid)
     }
   }
 
