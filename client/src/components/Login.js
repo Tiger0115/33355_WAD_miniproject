@@ -14,20 +14,22 @@ export default function Login() {
 	});
 	const [user, loading, error] = useAuthState(auth);
 	const navigate = useNavigate();
-	useEffect(() => {
-		if (loading) {
-		  // maybe trigger a loading screen
-		  return;
-		}
-		if (user){
-			navigate("/");
-			alert("User Logged in Successfully");
-	    }
-	  }, [user, loading]);
+	// useEffect((event) => {
+		
+		
+	//   }, [user, loading]);
 
-	  const loginFunc=(event)=>{
-		// event.preventDefault();
-		logInWithEmailAndPassword(person.email, person.password)
+	  const loginFunc=()=>{
+		if (loading) {
+			// maybe trigger a loading screen
+			return;
+		  }
+		  if (user){
+			  // event.preventDefault();
+			  navigate("/");
+			  alert("User Logged in Successfully");
+		  }
+		// logInWithEmailAndPassword(person.email, person.password)
 	  }
 
 // 	// const [email, setEmail] = useState("");
@@ -107,7 +109,8 @@ export default function Login() {
 					
 					<div className="col 4">		
 					{console.log(person.password)}	
-					<button onClick={() => logInWithEmailAndPassword(person.email, person.password)} type='button' className='btn btn-primary btn-block mb-4 '>
+					<button onClick={() => {logInWithEmailAndPassword(person.email, person.password); loginFunc()}} type='button' className='btn btn-primary btn-block mb-4 '>
+						
 						Sign in
 					</button>
 					{/* <button className="login__btn login__google" onClick={signInWithGoogle}>
