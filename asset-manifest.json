@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/pharma-react/static/css/main.e6c13ad2.css",
+    "main.js": "/pharma-react/static/js/main.10e054f6.js",
+    "static/js/787.c05b26da.chunk.js": "/pharma-react/static/js/787.c05b26da.chunk.js",
+    "index.html": "/pharma-react/index.html",
+    "main.e6c13ad2.css.map": "/pharma-react/static/css/main.e6c13ad2.css.map",
+    "main.10e054f6.js.map": "/pharma-react/static/js/main.10e054f6.js.map",
+    "787.c05b26da.chunk.js.map": "/pharma-react/static/js/787.c05b26da.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e6c13ad2.css",
+    "static/js/main.10e054f6.js"
+  ]
+}
