@@ -15,9 +15,14 @@ export default function Home() {
   const [sellStock,setSellStock]=useState(0);
 
   const [list, setList]= useState([])
-  // const [data,setData]=useState([])
+  // const [temp,setTemp]=useState({
+  //   "mName":"",
+  //   "uid":0,
+  //   "cpu":0.0,
+  //   "stock":0 
+  // });
   const [sellMed, setSellMed] = useState([])
-  let arr=[];
+ 
 
     const getMed=()=>{
        alert("Sold");
@@ -32,69 +37,100 @@ export default function Home() {
       })
       .catch(err => console.error(err));
     }
+    
+    let arr=[];
+    const addItem = () => {
+      let name = mName;
+    
+      axios
+        .post('http://localhost:8000/medicine/find', { name })
+        .then((res) => {
+          if (res.data[0].uid === 0) {
+            alert('Medicine not found');
+            return;
+          }
+    
+          const med = res.data[0];
+    
+          if (sellStock > med.incomingStock) {
+            alert('Stock Low');
+            return;
+          }
+    
+          let temp = {
+            mName: mName,
+            uid: med.uid,
+            cpu: med.costPerUnit,
+            stock: sellStock,
+          };
+          let newArr = [...arr, temp];
+          // arr.push(temp);
+          alert('Medicine Added Successfully');
+          setSellMed(newArr);
+          arr = newArr;
+        })
+        .catch((err) => {
+          console.error(err);
+          alert('Error occurred while searching medicine');
+        });
+    };
+  // const addItem=()=>{
+  //   let name=mName
+  //   axios.post('http://localhost:8000/medicine/find', {name})
+  //     .then(res=>{
+  //         // console.log(res.data[0].uid);
+  //         if (res.data.length === 0) {
+  //           alert('Medicine not found');
+  //           return;
+  //         }
+  //         setUid(res.data[0].uid);
+  //         setDisease(res.data[0].disease);
+  //         setCpu(res.data[0].costPerUnit);
+  //         setstock(res.data[0].incomingStock);
+  //         setAllergy(res.data[0].allergyWarning);
+          
+          
+  //         if(sellStock>stock)
+  //           {
+  //             alert("Stock Low");
+  //           }
+  //           else {
+  //             let temp = {
+  //               mName: mName,
+  //               uid: uid,
+  //               cpu: cpu,
+  //               stock: sellStock,
+  //             };
+  //             arr.push(temp);
+  //             console.log(temp);
+  //             console.log(arr);
+  //             alert("Medicine Added Successfully");
+  //             setSellMed(arr); 
+  //           }
+  //         })
+  //     .catch(err => {
+  //       console.error(err);
+  //     alert("Medicine not found")
+  //   });
+  // }
+    
+    
+    // else {
+    //   let temp = {
+    //     mName: mName,
+    //     uid: uid,
+    //     cpu: cpu,
+    //     stock: sellStock,
+    //   };
+    //   arr.push(temp);
+    //   alert("Medicine Added Successfully");
+    //   setSellMed([...arr]); 
+   
+
+    
   
 
-  const addItem=()=>{
-    let name=mName
-    axios.post('http://localhost:8000/medicine/find', {name})
-      .then(res=>{
-          // console.log(res.data[0].uid);
-          setUid(res.data[0].uid);
-          setDisease(res.data[0].disease);
-          setCpu(res.data[0].costPerUnit);
-          setstock(res.data[0].incomingStock);
-          setAllergy(res.data[0].allergyWarning);
-      })
-      .catch(err => {
-        console.error(err);
-      alert("Medicine not found")
-    });
-    
-    
-    if(sellStock>stock)
-    {
-      alert("Stock Low");
-    }
-    else
-    {
-           
-      let temp={
-        "mName": mName,
-        "uid": uid,
-        "cpu": cpu,
-        "stock": sellStock
-      }
-      
-      arr.push(temp)
-      alert("Medicine Added Successfully")
-      console.log(temp.mName);
-      setSellMed(arr)
-      console.log(temp);
-      // axios.post('http://localhost:8000/medicine/bill', {mName,sellStock})
-      // .then(res=>{
-      //   // console.log(res);        
-      //   setUid(res.data.uid);
-      //   setDisease(res.data.disease);
-      //   setCpu(res.data.costPerUnit);
-      //   setstock(res.data.incomingStock);
-      //   setAllergy(res.allergyWarning);         
-      // })
-      // .catch(err => console.error(err));
-    //  console.log(uid)
-    }
-  }
 
-  // const checkQuantity=(event)=>{
-  //   setSellStock(event.target.value)
-  //   if(uid===0)
-  //   {
-  //     alert("Medicine Name Not Found")
-  //   }
-  //   else if(sellStock>stock)
-  //   {
-  //     alert("Quantity more than stock");
-  //   }    
-  // }
 
   return (
     <>
@@ -129,15 +165,15 @@ export default function Home() {
               </tbody>
 
             </table>
-            <div class="input-group input-group-sm mb-3">
-              <span class="input-group-text" id="inputGroup-sizing-sm">Medicine Name</span>
-              <input type="text" value={mName} class="form-control" onChange={(e) => setmName(e.target.value)} aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+            <div className="input-group input-group-sm mb-3">
+              <span className="input-group-text" id="inputGroup-sizing-sm">Medicine Name</span>
+              <input type="text" value={mName} className="form-control" onChange={(e) => setmName(e.target.value)} aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
 
-              <span class="input-group-text" id="inputGroup-sizing-sm">Quantity</span>
-              <input type="number" value={sellStock} class="form-control" onChange={(e) => setSellStock(e.target.value)}  aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
-              <button type="button" class="btn btn-primary" onClick={addItem}>+ Add Medicine</button>
+              <span className="input-group-text" id="inputGroup-sizing-sm">Quantity</span>
+              <input type="number" value={sellStock} className="form-control" onChange={(e) => setSellStock(e.target.value)}  aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm"/>
+              <button type="button" className="btn btn-primary" onClick={addItem}>+ Add Medicine</button>
             </div>
-            <button type="button" class="btn btn-primary" onClick={getMed}>Complete Order</button>
+            <button type="button" className="btn btn-primary" onClick={getMed}>Complete Order</button>
         </div>
         </center>
     </>

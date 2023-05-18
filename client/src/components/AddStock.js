@@ -130,8 +130,8 @@ export default function AddStock() {
                 <input type="text" className="form-control" onChange={(e) => setNewStock(e.target.value)} id="newStock"/>
             </div>
 
-            <div class="col-md-6 my-3">
-                <button type="submit" onClick={handleChange} class="btn btn-primary">Add Stock</button>
+            <div className="col-md-6 my-3">
+                <button type="submit" onClick={handleChange} className="btn btn-primary">Add Stock</button>
             </div>
         </div>
     </>

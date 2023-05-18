@@ -150,6 +150,7 @@ const Register = () => {
   const register = () => {
     if (!name) alert("Please enter name");
     registerWithEmailAndPassword(name, email, password);
+    alert("Registered successfully");
   };
   useEffect(() => {
     if (loading) return;
@@ -159,11 +160,12 @@ const Register = () => {
     <div className="register">
       <NewNavbar/>
       <center>
+      
       <div className="register__container col-6">
         <div className="col-6 my-3">
           <input
             type="text"
-            className="register__textBox"
+            className="register__textBox form-control"
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Full Name"
@@ -172,7 +174,7 @@ const Register = () => {
         <div className="col-6 my-3">
           <input
             type="text"
-            className="register__textBox"
+            className="register__textBox form-control"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="E-mail Address"
@@ -181,25 +183,25 @@ const Register = () => {
         <div className="col-6 my-3">
           <input
             type="password"
-            className="register__textBox"
+            className="register__textBox form-control"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
           />
         </div>
         <div className="col-6 my-3">
-          <button className="register__btn" onClick={register}>
+          <button className="register__btn btn btn-primary" onClick={register}>
             Register
           </button>
         </div>
 
         <div className="col-6 my-3">
-          <button
+          {/* <button
             className="register__btn register__google"
             onClick={signInWithGoogle}
           >
             Register with Google
-          </button>
+          </button> */}
         </div>
         <div>
           Already have an account? <Link to="/login">Login</Link> now.

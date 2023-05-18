@@ -15,7 +15,7 @@ export default function Navbar() {
             <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                     <li className="nav-item">
-                        <a className="nav-link active" aria-current="page" href="/Home">Home</a>
+                        <a className="nav-link active" aria-current="page" href="/">Home</a>
                     </li>
 
                     <li className="nav-item">
@@ -37,7 +37,7 @@ export default function Navbar() {
 
                 </ul>
                 <div>
-                 <button button class="btn btn-outline-secondary" style={{color:"black", border:"2px solid black"}} type="logout" ><a style={{color:"black", visited:"black"}} href="/Login">Logout</a></button>
+                 <button button className="btn btn-outline-secondary" style={{color:"black", border:"2px solid black"}} type="logout" ><a style={{color:"black", visited:"black"}} href="/Login">Logout</a></button>
               </div> 
                 
             </div>

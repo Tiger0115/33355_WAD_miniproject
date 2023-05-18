@@ -78,7 +78,7 @@ export default function NewMed() {
                 <input type="text" className="form-control" onChange={(e) => setAllergy(e.target.value)} id="AllergyWarning"/>
             </div>
             
-            <div class="col-12">
+            <div className="col-12">
                 <button type="submit" onClick={sendData} className="btn btn-primary" id="addMed">Add Medicine</button>
             </div>
             
